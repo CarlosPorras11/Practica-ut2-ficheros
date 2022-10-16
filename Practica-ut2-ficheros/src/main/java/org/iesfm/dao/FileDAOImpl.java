@@ -1,25 +1,29 @@
 package org.iesfm.dao;
 
-import org.iesfm.entity.FileEntity;
+import org.iesfm.entity.Article;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class FileDAOImpl implements FileDAO {
 
 
     @Override
-    public void readTextInFile(File file, String text) {
+    public List<String> readTextAndLoadInFile(File file) throws IOException {
         try (FileReader fileReader = new FileReader(file);
              BufferedReader br = new BufferedReader(fileReader)) {
             String line;
-            System.out.printf("Lectura del fichero %s: \n", file.getName());
+            List<String> text = new LinkedList<>();
+            boolean lineN1 = true;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                if (lineN1) {
+                    lineN1 = false;
+                    continue;
+                }
+                text.add(line);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            return text;
         }
     }
 
@@ -34,14 +38,15 @@ public class FileDAOImpl implements FileDAO {
         }
     }
 
+
     @Override
-    public void insertArticleInfo(FileEntity fileEntity) {
-        System.out.println("Articulo: " + fileEntity.getArticle());
-        System.out.println("Tipo: " + fileEntity.getType());
-        System.out.println("Precio de Venta: " + fileEntity.getSellPrice());
-        double cost = fileEntity.getDerivedCosts() + fileEntity.getProductionCosts() + fileEntity.getTaxes();
+    public void insertArticleInfo(Article article) {
+        System.out.println("Articulo: " + article.getArticle());
+        System.out.println("Tipo: " + article.getType());
+        System.out.println("Precio de Venta: " + article.getSellPrice());
+        double cost = article.getDerivedCosts() + article.getProductionCosts() + article.getTaxes();
         System.out.println("Coste: " + cost);
-        double benefits = fileEntity.getSellPrice() - cost;
+        double benefits = article.getSellPrice() - cost;
         System.out.println("Beneficio" + benefits);
         for (int i = 0; i < 25; i++) {
             System.out.printf("=");
@@ -49,15 +54,17 @@ public class FileDAOImpl implements FileDAO {
     }
 
     @Override
-    public String[] separaPorComponentes(File file) {
-        try (FileReader fileReader = new FileReader(file);
-             BufferedReader br = new BufferedReader(fileReader)){
-            String[] line;
-            String separaline = line.split(";");
+    public List<Article> createNewArticle(String path) throws IOException {
+        File file = new File(path);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<String> lines = readTextAndLoadInFile(file);
+        List<Article> articles = new LinkedList<>();
+
+        String[] separatedText;
+        for (String line : lines) {
+            separatedText = line.replace(",", ".").split(";");
         }
+
     }
 
 
