@@ -1,0 +1,24 @@
+Articulo: Friends
+Tipo: Camiseta
+Precio de venta: 8.0
+Coste: %.2f5.9
+Beneficio: %.2f2.0999999999999996
+==================================
+Articulo: Friends
+Tipo: Camiseta
+Precio de venta: 8.0
+Coste: %.2f5.9
+Beneficio: %.2f2.0999999999999996
+==================================
+Articulo: Friends
+Tipo: Camiseta
+Precio de venta: 8.0
+Coste: %.2f5.9
+Beneficio: %.2f2.0999999999999996
+==================================
+Articulo: Friends
+Tipo: Camiseta
+Precio de venta: 8.0
+Coste: %.2f5.9
+Beneficio: %.2f2.0999999999999996
+==================================

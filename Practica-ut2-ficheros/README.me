@@ -1,0 +1,32 @@
+1. EJERCICIO 1 (3 PUNTOS)
+Cree un programa en Java que lea del fichero de texto invoice_202009.csv incluido en la práctica con la
+información referente a la factura del mes de Septiembre sobre las ventas de nuestra tienda, el fichero
+tiene la siguiente estructura:
+Articulo;Tipo;PrecioDeVenta;CosteDerivados;CostesProduccion;Impuestos
+Se pide mostrar por consola la siguiente información por cada artículo y guardar un fichero con el
+nombre de la factura.
+Articulo: <Articulo>
+Tipo: <Tipo>
+Precio de venta: <PrecioDeVenta>
+Coste: <Suma total de CosteDerivados + CosteProducción + Impuestos>
+Beneficio: <Difrencia entre PrecioDeVenta y Coste>
+
+Nota: el nombre del fichero (invoice_202009) es el nombre de la factura.
+2. EJERCICIO 2 (3 PUNTOS)
+Una vez mostrado el resultado por consola, cree un fichero de texto con el nombre
+result_<nombre_factura>.txt con la siguiente información:
+Factura: <nombreFactura>
+NumeroDeArticulos: <Número total de árticulos vendidos>
+BeneficioTotal: <Beneficio total de todos los artículos>
+Ruta del fichero: <Path al fichero procesado en el Ejercicio 1>
+Nombre del fichero: <Nombre del fichero procesado en el Ejercicio 1>
+Tamaño del fichero: <Tamaño del fichero procesado en el Ejercicio 1>
+
+3. EJERCICIO 3 (4 PUNTOS)
+Una vez generado el fichero se pide crear un Excel haciendo uso de la API ofrecida por Apache POI,
+con la siguiente estructura de información:
+
+Una vez creado y guardado en disco el fichero Excel actualiza el fichero creado en el Ejercicio 2 y añade una
+línea con la ruta al Excel y otra línea con el tamaño del fichero Excel creado.
+Si se aplica formato al Excel con color de fondo y tipo de letra, se valorará positivamente, si además el color
+de fondo es distinto por filas, se puntuará aún más.

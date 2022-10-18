@@ -23,6 +23,9 @@ public class Article {
         this.taxes = taxes;
     }
 
+    public Article() {
+    }
+
     public String getArticle() {
         return article;
     }
@@ -94,7 +97,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return "InvoiceEntity{" +
+        return "Article{" +
                 "article='" + article + '\'' +
                 ", type='" + type + '\'' +
                 ", date='" + date + '\'' +
@@ -104,4 +107,6 @@ public class Article {
                 ", taxes=" + taxes +
                 '}';
     }
+
+
 }
