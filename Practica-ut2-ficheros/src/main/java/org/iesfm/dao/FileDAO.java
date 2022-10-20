@@ -10,7 +10,7 @@ public interface FileDAO {
 
     List<String> readTextAndLoadInFile(File file) throws IOException;
 
-    void insertListIntoFile(List<Article> articles, File file) throws IOException;
+    void insertListIntoFile(File file, String text);
 
     String printArticleInfo(List<Article> articles);
 

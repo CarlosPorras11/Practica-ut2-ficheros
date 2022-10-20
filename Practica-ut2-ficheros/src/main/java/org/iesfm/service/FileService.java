@@ -7,6 +7,7 @@ import org.iesfm.entity.FileEntity;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -38,8 +39,8 @@ public class FileService {
                         .split(";");
                 Article article = fileDAO.setArticleInfo(splitLines);
                 articles.add(article);
-                System.out.println(fileDAO.printArticleInfo(articles));
-                fileDAO.insertListIntoFile(articles, fileResult);
+                System.out.print(fileDAO.printArticleInfo(articles));
+                fileDAO.insertListIntoFile(fileResult, fileDAO.printArticleInfo(articles));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,7 +51,6 @@ public class FileService {
 
     public void printInvoiceFile(String pathResult) {
         File[] files = fileDAO.listFiles(pathResult);
-
     }
 }
 

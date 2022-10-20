@@ -1,9 +1,9 @@
 package org.iesfm.dao;
 
 import org.iesfm.entity.Article;
+import org.iesfm.entity.FileEntity;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,13 +30,12 @@ public class FileDAOImpl implements FileDAO {
     }
 
     @Override
-    public void insertListIntoFile(List<Article> articles, File file) throws IOException {
-        try (OutputStreamWriter outputStreamWriter =
-                     new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.ISO_8859_1);
-             PrintWriter pw = new PrintWriter(outputStreamWriter)) {
-            for (int i = 0; i < articles.size(); i++) {
-                pw.println(printArticleInfo(articles));
-            }
+    public void insertListIntoFile(File file, String text) {
+        try (FileWriter fw = new FileWriter(file, true)) {
+            fw.write(text);
+            fw.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -50,13 +49,12 @@ public class FileDAOImpl implements FileDAO {
                     articles.get(i).getTaxes();
             double profits = articles.get(i).getSellPrice() - cost;
 
-
             info = "Articulo: " + articles.get(i).getArticle() + "\n" +
                     "Tipo: " + articles.get(i).getType() + "\n" +
                     "Precio de venta: " + articles.get(i).getSellPrice() + "\n" +
                     "Coste: " + cost + "\n" +
                     "Beneficio: " + profits + "\n" +
-                    "==================================";
+                    "==================================" + "\n";
 
         }
         return info;
@@ -85,12 +83,34 @@ public class FileDAOImpl implements FileDAO {
         return path.listFiles();
     }
 
-    public Article getArticlesNumber(List<Article> articles) {
-        int articlesNum = 0;
-        for (Article article: articles){
+    public String printFileInfo(List<FileEntity> fileEntities) {
+        String info = "";
+
+        for (int i = 0; i < fileEntities.size(); i++) {
+            info = "Factura: " + fileEntities.get(i).getInvoiceName() + "\n" +
+                    "Número de artículos: " + fileEntities.get(i).getArticleNumbers() + "\n" +
+                    "Beneficio Total: " + fileEntities.get(i).getTotalProfit() + "\n" +
+                    "Ruta de fichero: " + fileEntities.get(i).getFilePath() + "\n" +
+                    "Nombre del fichero: " + fileEntities.get(i).getFileName() + "\n" +
+                    "Tamaño del fichero: " + fileEntities.get(i).getFileSize() + "\n" +
+                    "==================================" + "\n";
 
         }
+        return info;
     }
 
-}
+    public FileEntity setFileInfo() {
+        FileEntity fileEntity = new FileEntity();
 
+        fileEntity.setInvoiceName();
+        fileEntity.setArticleNumbers();
+        fileEntity.setTotalProfit();
+        fileEntity.setFilePath();
+        fileEntity.setFileName();
+        fileEntity.setFileSize();
+
+
+
+        return fileEntity;
+    }
+}
