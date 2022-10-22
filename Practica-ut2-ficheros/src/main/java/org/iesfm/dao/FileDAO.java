@@ -1,6 +1,7 @@
 package org.iesfm.dao;
 
 import org.iesfm.entity.Article;
+import org.iesfm.entity.FileEntity;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,4 +18,12 @@ public interface FileDAO {
     Article setArticleInfo(String[] splitInfo);
 
     File[] listFiles(String directory);
+
+    String printFileInfo(List<FileEntity> fileEntities, FileEntity fileEntity);
+
+    int sumArticles(List<Article> articles);
+
+    double totalProfit(List<Article> articles);
+
+    FileEntity setFileInfo(String path, File file, List<Article> articles);
 }

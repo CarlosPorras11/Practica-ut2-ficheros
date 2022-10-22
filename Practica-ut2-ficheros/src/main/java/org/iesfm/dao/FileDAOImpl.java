@@ -47,13 +47,13 @@ public class FileDAOImpl implements FileDAO {
             double cost = articles.get(i).getDerivedCosts() +
                     articles.get(i).getProductionCosts() +
                     articles.get(i).getTaxes();
-            double profits = articles.get(i).getSellPrice() - cost;
+            double profit = articles.get(i).getSellPrice() - cost;
 
             info = "Articulo: " + articles.get(i).getArticle() + "\n" +
                     "Tipo: " + articles.get(i).getType() + "\n" +
                     "Precio de venta: " + articles.get(i).getSellPrice() + "\n" +
                     "Coste: " + cost + "\n" +
-                    "Beneficio: " + profits + "\n" +
+                    "Beneficio: " + profit + "\n" +
                     "==================================" + "\n";
 
         }
@@ -83,32 +83,59 @@ public class FileDAOImpl implements FileDAO {
         return path.listFiles();
     }
 
-    public String printFileInfo(List<FileEntity> fileEntities) {
+    @Override
+    public String printFileInfo(List<FileEntity> fileEntities, FileEntity fileEntity) {
         String info = "";
 
         for (int i = 0; i < fileEntities.size(); i++) {
-            info = "Factura: " + fileEntities.get(i).getInvoiceName() + "\n" +
-                    "Número de artículos: " + fileEntities.get(i).getArticleNumbers() + "\n" +
-                    "Beneficio Total: " + fileEntities.get(i).getTotalProfit() + "\n" +
-                    "Ruta de fichero: " + fileEntities.get(i).getFilePath() + "\n" +
-                    "Nombre del fichero: " + fileEntities.get(i).getFileName() + "\n" +
-                    "Tamaño del fichero: " + fileEntities.get(i).getFileSize() + "\n" +
-                    "==================================" + "\n";
 
+
+            info = "Factura: " + fileEntity.getInvoiceName() + "\n" +
+                    "Número de artículos: " + fileEntity.getArticleNumbers() + "\n" +
+                    "Beneficio Total: " + fileEntity.getTotalProfit() + "\n" +
+                    "Ruta de fichero: " + fileEntity.getFilePath() + "\n" +
+                    "Nombre del fichero: " + fileEntity.getFileName() + "\n" +
+                    "Tamaño del fichero: " + fileEntity.getFileSize() + "\n" +
+                    "=============================================================" + "\n";
         }
         return info;
     }
 
-    public FileEntity setFileInfo() {
+    @Override
+    public int sumArticles(List<Article> articles) {
+        int articlesNum = 0;
+        for (int i = 0; i < articles.size(); i++) {
+
+            articlesNum = articles.size();
+        }
+        return articlesNum;
+    }
+
+    @Override
+    public double totalProfit(List<Article> articles) {
+        double profits = 0;
+        for (int i = 0; i < articles.size(); i++) {
+            double cost = articles.get(i).getDerivedCosts() +
+                    articles.get(i).getProductionCosts() +
+                    articles.get(i).getTaxes();
+            double profit = articles.get(i).getSellPrice() - cost;
+
+            profits += profit;
+
+        }
+        return profits;
+    }
+
+    @Override
+    public FileEntity setFileInfo(String fileName, File file, List<Article> articles) {
         FileEntity fileEntity = new FileEntity();
 
-        fileEntity.setInvoiceName();
-        fileEntity.setArticleNumbers();
-        fileEntity.setTotalProfit();
-        fileEntity.setFilePath();
-        fileEntity.setFileName();
-        fileEntity.setFileSize();
-
+        fileEntity.setInvoiceName(fileName);
+        fileEntity.setArticleNumbers(sumArticles(articles));
+        fileEntity.setTotalProfit(totalProfit(articles));
+        fileEntity.setFilePath(file.getPath());
+        fileEntity.setFileName(file.getName());
+        fileEntity.setFileSize(file.getTotalSpace());
 
 
         return fileEntity;
